@@ -1,18 +1,32 @@
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+
 const Header = () => {
+  const [btnText, setBtnText] = useState("Log In");
+
+  const toggleBtnText = () => {
+    setBtnText(btnText === "Log In" ? "Log Out" : "Log In");
+  };
+
   return (
-    <div className="bg-gradient-to-r from-black via-gray-900 to-gray-800 text-white">
-      <div className="container mx-auto flex justify-between items-center p-4">
-        <div className="flex items-center">
-          <a href="/">
-            <img src="https://cdn.dribbble.com/users/1635051/screenshots/4291569/socio_curry_logo-01.png" alt="logo" className="h-12 md:h-16" />
-          </a>
-          <h1 className="text-xl font-bold ml-2 md:ml-4">SocioCurry</h1>
+    <div className="bg-gradient-to-r from-gray-900 to-black">
+      <div className="container mx-auto py-4">
+        <div className="flex items-center justify-between">
+          <Link to="/">
+            <img
+              src="https://cdn.dribbble.com/users/1635051/screenshots/4291569/socio_curry_logo-01.png"
+              alt="logo"
+              className="h-12 md:h-16"
+            />
+          </Link>
+          <h1 className="text-white text-2xl md:text-3xl font-semibold">SocioCurry</h1>
         </div>
 
-        <nav className="hidden lg:flex items-center space-x-6">
-          <a href="/" className="hover:text-gray-300 font-semibold">Home</a>
-          <a href="/" className="hover:text-gray-300 font-semibold">About Us</a>
-          <a href="/" className="hover:text-gray-300 font-semibold">Contact Us</a>
+        <nav className="mt-4">
+          <Link to="/" className="text-white mr-4 hover:text-gray-300 py-2 px-4">Home</Link>
+          <Link to="/about" className="text-white mr-4 hover:text-gray-300 py-2 px-4">About Us</Link>
+          <Link to="/contact" className="text-white mr-4 hover:text-gray-300 py-2 px-4">Contact Us</Link>
+          <button className="text-white bg-transparent border border-white px-4 py-2 rounded hover:bg-white hover:text-gray-900" onClick={toggleBtnText}>{btnText}</button>
         </nav>
       </div>
     </div>
