@@ -1,12 +1,14 @@
+import React from 'react';
 import { useParams } from 'react-router-dom';
-import useRestaurantMenu from '../utilitis/useRestaurantMenu';
+import useRestaurantMenu from '../utilitis/useRestaurantMenu'
 import RestaurantCategory from './RestaurantCategory';
 
 const RestaurantMenu = () => {
-    const { resId } = useParams();
-    const resMenu = useRestaurantMenu(resId);
+    const { resId } = useParams();  // Fetching restaurant ID from URL params
+    const resMenu = useRestaurantMenu(resId);  // Custom hook to fetch restaurant menu data
 
     const generateStars = (rating) => {
+        // Function to generate star ratings based on average rating
         const fullStars = Math.floor(rating);
         const halfStar = rating - fullStars >= 0.5 ? 1 : 0;
         const emptyStars = 5 - fullStars - halfStar;
@@ -29,19 +31,19 @@ const RestaurantMenu = () => {
     };
 
     if (resMenu && resMenu.error) {
-        return <div className="text-red-600">Error: {resMenu.error}</div>;
+        return <div className="text-red-600">Error: {resMenu.error}</div>;  // Error handling
     }
 
     if (!resMenu || !resMenu.data) {
-        return <div className="text-gray-600">Loading...</div>;
+        return <div className="text-gray-600">Loading...</div>;  // Loading state
     }
 
+    // Destructuring restaurant data
     const { name, cuisines, costForTwo, avgRating, locality } = resMenu.data.cards[2].card.card.info;
-    
-    
-    const category =resMenu?.data?.cards[5]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter((c)=>c.card?.card?.["@type"]==="type.googleapis.com/swiggy.presentation.food.v2.ItemCategory");
-    
-    
+
+    // Filtering and mapping menu categories
+    const categories = resMenu?.data?.cards[5]?.groupedCard?.cardGroupMap?.REGULAR?.cards
+        .filter(c => c.card?.card?.["@type"] === "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory");
 
     return (
         <div className="container mx-auto py-8">
@@ -63,15 +65,16 @@ const RestaurantMenu = () => {
                 <h2 className="text-xl font-bold mb-2">Menu</h2>
             </div>
             <div>
-            {category.map((category)=>
-                (<RestaurantCategory data={category?.card?.card}/>)
-            )}
+                {categories.map(category => (
+                    <RestaurantCategory key={category.card.card.id} data={category.card.card} />
+                ))}
             </div>
-            
         </div>
     );
 }
 
-
-
 export default RestaurantMenu;
+
+
+
+

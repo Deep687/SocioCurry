@@ -12,6 +12,7 @@ const RestaurantCard = (props) => {
           <img
             src={`https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/${cloudinaryImageId}`}
             alt={name}
+            loading='lazy'
             className="w-full h-full object-cover object-center rounded-t-lg"
           />
           <div className="absolute top-0 left-0 bg-black bg-opacity-50 text-white py-1 px-2 rounded-tr-lg">
