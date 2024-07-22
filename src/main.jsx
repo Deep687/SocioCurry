@@ -1,8 +1,7 @@
 import React, { Suspense, lazy } from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client'; 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
-
 import './index.css';
 import appStore from './utilitis/appStore';
 
@@ -11,8 +10,11 @@ const RestaurantMenu = lazy(() => import('./components/RestaurantMenu'));
 const About = lazy(() => import('./components/About'));
 const ContactUs = lazy(() => import('./components/ContactUs'));
 const Body = lazy(() => import('./components/Body'));
-const Cart =lazy(()=>import('./components/Cart'))
-ReactDOM.createRoot(document.getElementById('root')).render(
+const Cart = lazy(() => import('./components/Cart'));
+
+const root = createRoot(document.getElementById('root'));
+
+root.render(
   <React.StrictMode>
     <Provider store={appStore}>
       <BrowserRouter>

@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { clearItems, removeItem } from '../utilitis/cartSlice';
 import PriceCart from '../utilitis/PriceCart';

@@ -19,8 +19,17 @@ const Body = () => {
     try {
       const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=21.1458004&lng=79.0881546&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
       const json = await data.json();
-      setListOfRestaurant(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-      setFilterList(json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+      console.log(json);
+      
+      const restaurants = json?.data?.cards?.[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+      
+      if (Array.isArray(restaurants)) {
+        setListOfRestaurant(restaurants);
+        setFilterList(restaurants);
+      } else {
+        throw new Error("Unexpected data structure");
+      }
+      
       setLoading(false);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -28,12 +37,13 @@ const Body = () => {
       setLoading(false);
     }
   };
-
   const debouncedSearch = debounce((text) => {
-    const filterSearchText = listOfRestaurant.filter((restaurant) =>
-      restaurant.info.name.toLowerCase().includes(text.toLowerCase())
-    );
-    setFilterList(filterSearchText);
+    if (Array.isArray(listOfRestaurant)) {
+      const filterSearchText = listOfRestaurant.filter((restaurant) =>
+        restaurant.info.name.toLowerCase().includes(text.toLowerCase())
+      );
+      setFilterList(filterSearchText);
+    }
   }, 300);
 
   const handleSearchChange = (e) => {
@@ -48,8 +58,8 @@ const Body = () => {
 
   return (
     <div className="bg-gray-100 min-h-screen py-8">
-      {error && <div className="text-red-600">{error}</div>}
-      <div className="flex flex-col sm:flex-row items-center justify-between px-4 md:px-8">
+      {error && <div className="text-red-600 text-center">{error}</div>}
+      <div className="flex flex-col sm:flex-col items-center justify-between px-4 md:px-8">
         <input
           type="text"
           name="searchBar"
@@ -60,7 +70,7 @@ const Body = () => {
         />
         <button
           onClick={clearFilter}
-          className="bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+          className="bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded w-full sm:w-auto"
         >
           Clear Filter
         </button>
@@ -77,23 +87,27 @@ const Body = () => {
             Show Top Rated Restaurants
           </button>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 my-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 my-2">
           {loading ? (
             Array.from({ length: 8 }).map((_, index) => (
               <RestaurantCardSkeleton key={index} />
             ))
           ) : (
-            filterList.map((restaurant) => (
-              <div className="restaurant-card-wrapper" key={restaurant.info.id}>
-                <Link to={"/menu/" + restaurant.info.id}>
-                  {restaurant.info.promoted ? (
-                    <PromotedCard resData={restaurant} />
-                  ) : (
-                    <RestaurantCard resData={restaurant} />
-                  )}
-                </Link>
-              </div>
-            ))
+            Array.isArray(filterList) && filterList.length > 0 ? (
+              filterList.map((restaurant) => (
+                <div className="restaurant-card-wrapper" key={restaurant.info.id}>
+                  <Link to={"/menu/" + restaurant.info.id}>
+                    {restaurant.info.promoted ? (
+                      <PromotedCard resData={restaurant} />
+                    ) : (
+                      <RestaurantCard resData={restaurant} />
+                    )}
+                  </Link>
+                </div>
+              ))
+            ) : (
+              <div className="text-center text-gray-600">No restaurants found.</div>
+            )
           )}
         </div>
       </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import ItemList from '../utilitis/ItemList';
 
 const RestaurantCategory = (props) => {
@@ -12,8 +12,8 @@ const RestaurantCategory = (props) => {
     };
 
     return (
-        <div className="flex justify-center"> {/* Centering container */}
-            <div className="w-9/12"> {/* 70% width */}
+        <div className="flex justify-center"> 
+            <div className="w-9/12"> 
                 <div className="border border-gray-300 rounded-lg mb-4">
                     <div className="flex items-center justify-between px-4 py-3 cursor-pointer" onClick={toggleAccordion}>
                         <p className="text-lg font-medium">{title}({data.itemCards.length})</p>
