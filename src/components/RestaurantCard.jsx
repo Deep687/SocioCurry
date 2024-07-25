@@ -1,7 +1,8 @@
-import React from 'react';
+import React from "react";
 
 const RestaurantCard = ({ resData }) => {
-  const { cuisines, name, sla, costForTwo, avgRating, cloudinaryImageId } = resData?.info;
+  const { cuisines, name, sla, costForTwo, avgRating, cloudinaryImageId } =
+    resData?.info;
   const truncatedCuisines = cuisines.slice(0, 2);
 
   return (
@@ -19,7 +20,10 @@ const RestaurantCard = ({ resData }) => {
       <div className="p-2">
         <p className="text-lg font-semibold mb-2">{name}</p>
         <div className="flex items-center mb-2">
-          <p className="text-gray-600">Cuisine: {truncatedCuisines.join(", ")}{cuisines.length > 5 && '...'}</p>
+          <p className="text-gray-600">
+            Cuisine: {truncatedCuisines.join(", ")}
+            {cuisines.length > 5 && "..."}
+          </p>
         </div>
         <div className="flex items-center mb-2">
           <p className="text-gray-600">Avg. Time: {sla.deliveryTime} Minutes</p>

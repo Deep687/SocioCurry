@@ -1,4 +1,3 @@
-
 SocioCurry :-
 (Food Ordering Website)
 
@@ -11,7 +10,6 @@ Features:-
 Browse restaurants near your location
 View restaurant details including menu items and prices
 Responsive design for optimal viewing on various devices
-
 
 Technologies Used:-
 
@@ -38,5 +36,3 @@ This project was built as part of DEEP MANKAR's portfolio.
 
 Contact:-
 For questions or feedback, please contact deepmankar0@gmail.com.
-
-
