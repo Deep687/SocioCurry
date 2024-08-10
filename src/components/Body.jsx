@@ -24,25 +24,27 @@ const Body = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch("/api/restaurants/list/v5?lat=21.1458004&lng=79.0881546&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
+      const response = await fetch(
+        "https://www.swiggy.com/dapi/restaurants/list/v5?lat=21.1458004&lng=79.0881546&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+      );
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const json = await response.json();
-  
+
       const restaurants =
         json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants ||
         json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants;
-  
+
       if (Array.isArray(restaurants)) {
         setListOfRestaurant(restaurants);
         setFilterList(restaurants);
       } else {
         throw new Error("Unexpected data structure");
       }
-  
+
       setLoading(false);
     } catch (error) {
       setError(
