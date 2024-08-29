@@ -80,24 +80,40 @@ const Body = () => {
     <div className="body mx-1 lg:mx-10 lg:mt-10 md:mt-5 mt-3 p-5 lg:p-8 rounded-lg shadow-lg">
       {error && (
         <div className="text-red-500 font-semibold bg-red-100 p-4 rounded-lg mb-4">
-          {error}{" "}
-          <Link to="/about" className="underline">
-            Visit About Us
-          </Link>
+          {error}
           <p className="mt-2 text-sm">
-            We are encountering a CORS error because the app is using Swiggy's
-            API, which does not allow access to data from non-Swiggy domains.
-            Please enable the extension to resolve this issue.
-            <a
-              href="https://chrome.google.com/webstore/detail/cors-unblock/lfhmikememgdcahcdlaciloancbhjino"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-500 hover:underline ml-1"
-            >
-              Click here
-            </a>
-            , then click 'Add to Chrome', start the extension from extension tab
-            on chrome and refresh this page.
+            ⚠️ CORS Error: Our app can't access Swiggy's API directly due to
+            browser security restrictions.
+          </p>
+          <p className="mt-2 text-sm">
+            📱 On mobile? Unfortunately, we can't resolve this here, because we
+            cannot install cors unblock extension on mobile.
+          </p>
+          <p className="mt-2 text-sm">
+            🖥️ On desktop Chrome, follow these steps:
+          </p>
+          <ol className="mt-2 text-sm list-decimal list-inside">
+            <li>
+              Install the{" "}
+              <a
+                href="https://chrome.google.com/webstore/detail/cors-unblock/lfhmikememgdcahcdlaciloancbhjino"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-500 hover:underline"
+              >
+                CORS Unblock extension
+              </a>
+            </li>
+            <li>Click 'Add to Chrome', then 'Add extension'</li>
+            <li>
+              Click the extension icon in the toolbar to activate it (icon
+              should turn green)
+            </li>
+            <li>Refresh this page</li>
+          </ol>
+          <p className="mt-2 text-sm">
+            This bypasses CORS restrictions and allows us to fetch restaurant
+            data. 😊
           </p>
         </div>
       )}
