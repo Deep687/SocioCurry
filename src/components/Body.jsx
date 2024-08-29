@@ -28,7 +28,9 @@ const Body = () => {
         "https://www.swiggy.com/dapi/restaurants/list/v5?lat=21.1458004&lng=79.0881546&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
       );
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        throw new Error(
+          "CORS error: Please enable the CORS Unblock extension and refresh the page"
+        );
       }
       const json = await response.json();
 
@@ -48,7 +50,7 @@ const Body = () => {
       setLoading(false);
     } catch (error) {
       setError(
-        "Error fetching data. Please check your connection or try again later."
+        "CORS error: Please enable the CORS Unblock extension and refresh the page."
       );
       setLoading(false);
     }
@@ -76,7 +78,29 @@ const Body = () => {
 
   return (
     <div className="body mx-1 lg:mx-10 lg:mt-10 md:mt-5 mt-3 p-5 lg:p-8 rounded-lg shadow-lg">
-      {error && <div className="text-red-500 font-semibold">{error}</div>}
+      {error && (
+        <div className="text-red-500 font-semibold bg-red-100 p-4 rounded-lg mb-4">
+          {error}{" "}
+          <Link to="/about" className="underline">
+            Visit About Us
+          </Link>
+          <p className="mt-2 text-sm">
+            We are encountering a CORS error because the app is using Swiggy's
+            API, which does not allow access to data from non-Swiggy domains.
+            Please enable the extension to resolve this issue.
+            <a
+              href="https://chrome.google.com/webstore/detail/cors-unblock/lfhmikememgdcahcdlaciloancbhjino"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-500 hover:underline ml-1"
+            >
+              Click here
+            </a>
+            , then click 'Add to Chrome', start the extension from extension tab
+            on chrome and refresh this page.
+          </p>
+        </div>
+      )}
 
       <div className="hero flex flex-col-reverse md:flex-row items-center md:items-start font-serif">
         <div className="flex-1 md:mr-5 mb-5 md:mb-0">
@@ -150,7 +174,7 @@ const Body = () => {
                 <div className="ml-3">
                   <p className="text-lg font-semibold">Pick Up</p>
                   <p className="text-sm text-gray-600">
-                    Pick up delivery at your doorstep
+                    Pick up your order or get doorstep delivery
                   </p>
                 </div>
               </div>

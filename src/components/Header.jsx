@@ -77,19 +77,7 @@ const Header = () => {
             />
           )}
         </NavLink>
-        <NavLink
-          to="/contact"
-          className={({ isActive }) =>
-            `relative ${isActive ? "text-green-500" : "text-white"}`
-          }
-        >
-          Contact Us
-          {({ isActive }) => (
-            <span
-              className={`block h-1 ${isActive ? "bg-green-500" : "bg-transparent"} absolute -bottom-1 left-0 right-0`}
-            />
-          )}
-        </NavLink>
+
         <NavLink
           to="/cart"
           className={({ isActive }) =>
@@ -154,20 +142,7 @@ const Header = () => {
                 />
               )}
             </NavLink>
-            <NavLink
-              to="/contact"
-              className={({ isActive }) =>
-                `relative text-black text-xl font-semibold ${isActive ? "text-red-500" : "text-black"}`
-              }
-              onClick={() => setDrawerOpen(false)}
-            >
-              Contact Us
-              {({ isActive }) => (
-                <span
-                  className={`block h-1 ${isActive ? "bg-green-500" : "bg-transparent"} absolute -bottom-1 left-0 right-0`}
-                />
-              )}
-            </NavLink>
+
             <NavLink
               to="/cart"
               className={({ isActive }) =>

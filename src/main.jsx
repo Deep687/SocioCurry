@@ -9,7 +9,6 @@ import Loading from "./utilitis/Loading";
 const AppLayout = lazy(() => import("./components/AppLayout"));
 const RestaurantMenu = lazy(() => import("./components/RestaurantMenu"));
 const About = lazy(() => import("./components/About"));
-const ContactUs = lazy(() => import("./components/ContactUs"));
 const Body = lazy(() => import("./components/Body"));
 const Cart = lazy(() => import("./components/Cart"));
 
@@ -24,7 +23,6 @@ root.render(
             <Route path="/" element={<AppLayout />}>
               <Route index element={<Body />} />
               <Route path="/about" element={<About />} />
-              <Route path="/contact" element={<ContactUs />} />
               <Route path="/menu/:resId" element={<RestaurantMenu />} />
               <Route path="/cart" element={<Cart />} />
             </Route>

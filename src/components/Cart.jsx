@@ -16,29 +16,30 @@ const Cart = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <div className="flex flex-col justify-center items-center mb-4">
-        <h2 className="text-2xl font-semibold text-center">Your Cart</h2>
-        <button
-          className="bg-slate-700 hover:bg-slate-800 text-white font-bold py-2 px-4 rounded transition duration-300"
-          onClick={handleClearItems}
-        >
-          Clear This Cart
-        </button>
-      </div>
-      {cartItems.length === 0 ? (
-        <div className="text-center text-lg font-semibold text-gray-700">
-          Your Cart Is Empty!!! Add Some Items, So You Can Eat Some
-          Mouth-Watering Stuff 😊!
+    <div className="w-full max-w-full overflow-x-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 bg-gray-50">
+        <div className="flex flex-col sm:flex-row justify-between items-center mb-6 sm:mb-8">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-4 sm:mb-0">
+            Your Cart
+          </h2>
+          {cartItems.length > 0}
         </div>
-      ) : (
-        <>
-          <CartItems data={cartItems} onRemoveItem={handleRemoveItem} />
-          <div>
-            <PriceCart data={cartItems} />
+        {cartItems.length === 0 ? (
+          <div className="text-center text-lg sm:text-xl font-semibold text-gray-600 bg-white p-6 sm:p-8 rounded-lg shadow">
+            Your Cart Is Empty! Add some delicious items to satisfy your
+            cravings 😋
           </div>
-        </>
-      )}
+        ) : (
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+            <div className="lg:col-span-2 overflow-x-auto">
+              <CartItems data={cartItems} onRemoveItem={handleRemoveItem} />
+            </div>
+            <div className="lg:col-span-1">
+              <PriceCart data={cartItems} />
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

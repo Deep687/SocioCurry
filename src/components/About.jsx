@@ -1,65 +1,167 @@
+import React from "react";
+import {
+  FaGithub,
+  FaLinkedin,
+  FaEnvelope,
+  FaCode,
+  FaGraduationCap,
+} from "react-icons/fa";
+
 const About = () => {
+  const skills = [
+    {
+      name: "Frontend",
+      icon: <FaCode />,
+      items: [
+        "React",
+        "JavaScript",
+        "HTML5",
+        "CSS3",
+        "Tailwind CSS",
+        "Redux Toolkit",
+      ],
+    },
+    {
+      name: "Learning",
+      icon: <FaGraduationCap />,
+      items: ["Node.js", "Express.js", "MongoDB"],
+    },
+    { name: "Tools", icon: null, items: ["Git", "VS Code"] },
+  ];
+
+  const projects = [
+    {
+      name: "SocioCurry",
+      description:
+        "A food app created with React, Tailwind CSS, and Redux Toolkit",
+      link: "https://github.com/Deep687/SocioCurry.git",
+    },
+  ];
+
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="w-full max-w-3xl bg-white shadow-lg rounded-lg p-8">
-        <h1 className="text-4xl font-bold text-center text-gray-800 mb-8">
-          About Me
-        </h1>
-        <p className="text-lg text-gray-700 mb-6">
-          Hello! My name is Deep Chakradhar Mankar, and I am a Master of
-          Computer Applications (MCA) student with a passion for front-end
-          development, specializing in React.
-        </p>
+    <div className="min-h-screen bg-gradient-to-b from-gray-100 to-gray-200 py-4 px-2 sm:py-8 sm:px-4 md:py-12 md:px-6 overflow-hidden">
+      <div className="max-w-5xl mx-auto bg-white shadow-xl rounded-lg overflow-hidden">
+        <header className="bg-blue-600 text-white p-4 sm:p-6 md:p-8 text-center">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2">
+            Deep Chakradhar Mankar
+          </h1>
+          <p className="text-base sm:text-lg md:text-xl">
+            Frontend Developer | Aspiring Full-Stack Developer
+          </p>
+        </header>
 
-        <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-          My Mission
-        </h2>
-        <p className="text-lg text-gray-700 mb-6">
-          My mission is to leverage modern web technologies to create intuitive
-          and visually appealing user experiences. As a React Developer, I focus
-          on building responsive and functional interfaces using Tailwind CSS
-          and React.
-        </p>
+        <main className="p-4 sm:p-6 md:p-8">
+          <section className="mb-6 sm:mb-8 md:mb-12">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-800 mb-3">
+              About Me
+            </h2>
+            <p className="text-sm sm:text-base md:text-lg text-gray-700">
+              I'm a passionate frontend developer and MCA student with a keen
+              interest in creating engaging user interfaces. My journey in web
+              development began with mastering HTML, CSS, and JavaScript, and
+              I've since specialized in React for building dynamic web
+              applications. I'm currently expanding my skills towards full-stack
+              development, learning backend technologies to complement my
+              frontend expertise.
+            </p>
+          </section>
 
-        <h2 className="text-2xl font-semibold text-gray-800 mb-4">My Story</h2>
-        <p className="text-lg text-gray-700 mb-6">
-          Currently pursuing a Master of Computer Applications (MCA), I have
-          always been fascinated by the web development world. My journey in
-          tech started with learning the basics of HTML, CSS, and JavaScript and
-          has since evolved into a dedicated focus on front-end development with
-          React.
-        </p>
+          <section className="mb-6 sm:mb-8 md:mb-12">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-800 mb-3">
+              Skills
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {skills.map((skillSet) => (
+                <div
+                  key={skillSet.name}
+                  className="bg-gray-50 p-3 sm:p-4 rounded-lg shadow"
+                >
+                  <h3 className="text-base sm:text-lg font-semibold mb-2 flex items-center">
+                    {skillSet.icon && (
+                      <span className="mr-2">{skillSet.icon}</span>
+                    )}
+                    {skillSet.name}
+                  </h3>
+                  <ul className="list-disc list-inside">
+                    {skillSet.items.map((item) => (
+                      <li
+                        key={item}
+                        className="text-gray-700 text-xs sm:text-sm"
+                      >
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </section>
 
-        <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-          More About Me
-        </h2>
-        <p className="text-lg text-gray-700 mb-4">
-          As a solo developer, I bring a unique perspective to my projects. Here
-          are some key details about me:
-        </p>
-        <ul className="list-disc list-inside text-lg text-gray-700 mb-6">
-          <li>
-            <strong>Name:</strong> Deep Chakradhar Mankar
-          </li>
-          <li>
-            <strong>Role:</strong> React.js Developer
-          </li>
-          <li>
-            <strong>Specialization:</strong> React.js
-          </li>
-        </ul>
+          <section className="mb-6 sm:mb-8 md:mb-12">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-800 mb-3">
+              Projects
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {projects.map((project) => (
+                <div
+                  key={project.name}
+                  className="bg-white p-3 sm:p-4 rounded-lg shadow-md"
+                >
+                  <h3 className="text-base sm:text-lg font-semibold mb-2">
+                    {project.name}
+                  </h3>
+                  <p className="text-gray-600 mb-3 text-xs sm:text-sm">
+                    {project.description}
+                  </p>
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-600 hover:text-blue-800 transition-colors text-xs sm:text-sm"
+                  >
+                    View on GitHub
+                  </a>
+                </div>
+              ))}
+            </div>
+          </section>
 
-        <h2 className="text-2xl font-semibold text-gray-800 mb-4">
-          Contact Me
-        </h2>
-        <p className="text-lg text-gray-700 mb-2">
-          I would love to hear from you! Whether you have a project in mind, a
-          question, or just want to connect, feel free to reach out:
-        </p>
-        <p className="text-lg text-blue-500 underline">
-          Email:{" "}
-          <a href="mailto:deepmankar0@gmail.com">deepmankar0@gmail.com</a>
-        </p>
+          <section>
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-800 mb-3">
+              Let's Connect
+            </h2>
+            <p className="text-sm sm:text-base md:text-lg text-gray-700 mb-4">
+              I'm always excited to work on new projects and continue growing as
+              a developer. Whether you're looking for a frontend developer or
+              have advice on my journey to full-stack development, I'd love to
+              hear from you!
+            </p>
+            <div className="flex space-x-4 sm:space-x-6">
+              <a
+                href="mailto:deepmankar0@gmail.com"
+                className="text-blue-600 hover:text-blue-800 transition-colors"
+              >
+                <FaEnvelope size={28} />
+              </a>
+              <a
+                href="https://github.com/Deep687"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-700 hover:text-gray-900 transition-colors"
+              >
+                <FaGithub size={28} />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/deep-mankar-a938b5287/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-700 hover:text-blue-900 transition-colors"
+              >
+                <FaLinkedin size={28} />
+              </a>
+            </div>
+          </section>
+        </main>
       </div>
     </div>
   );
